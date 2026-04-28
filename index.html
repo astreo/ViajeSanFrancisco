@@ -1,0 +1,800 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>San Francisco 2026 · Guía para amigos</title>
+  <style>
+    :root {
+      --bg: #0e1726;
+      --card: #152238;
+      --card-2: #1b2d4a;
+      --text: #f8fafc;
+      --muted: #b8c4d6;
+      --accent: #ff6b4a;
+      --accent-2: #ffd166;
+      --green: #6ee7b7;
+      --blue: #7dd3fc;
+      --border: rgba(255,255,255,0.12);
+      --shadow: 0 20px 55px rgba(0,0,0,0.35);
+      --radius: 22px;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background:
+        radial-gradient(circle at 15% 10%, rgba(255, 107, 74, 0.20), transparent 30%),
+        radial-gradient(circle at 85% 5%, rgba(125, 211, 252, 0.16), transparent 28%),
+        linear-gradient(180deg, #0e1726 0%, #101827 45%, #0b1220 100%);
+      color: var(--text);
+      line-height: 1.55;
+    }
+
+    a { color: inherit; }
+
+    .container {
+      width: min(1180px, calc(100% - 34px));
+      margin: 0 auto;
+    }
+
+    header.hero {
+      min-height: 78vh;
+      display: grid;
+      align-items: end;
+      padding: 36px 0;
+      position: relative;
+      overflow: hidden;
+      border-bottom: 1px solid var(--border);
+      background:
+        linear-gradient(180deg, rgba(14,23,38,0.20), rgba(14,23,38,0.94)),
+        url('https://images.unsplash.com/photo-1610312278520-bcc893a3ff1d?auto=format&fit=crop&w=1800&q=80') center/cover no-repeat;
+    }
+
+    nav.topbar {
+      position: fixed;
+      top: 14px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 10;
+      width: min(1180px, calc(100% - 34px));
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 14px;
+      border: 1px solid rgba(255,255,255,0.15);
+      background: rgba(10, 18, 32, 0.72);
+      backdrop-filter: blur(14px);
+      border-radius: 999px;
+      box-shadow: 0 12px 32px rgba(0,0,0,0.25);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 800;
+      letter-spacing: 0.2px;
+    }
+
+    .brand .mark {
+      width: 34px;
+      height: 34px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      color: #121212;
+      font-weight: 900;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      font-size: 0.9rem;
+      color: var(--muted);
+      padding: 8px 12px;
+      border-radius: 999px;
+    }
+
+    .nav-links a:hover { background: rgba(255,255,255,0.08); color: white; }
+
+    .hero-content {
+      padding: 160px 0 48px;
+      max-width: 880px;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      color: #fff;
+      background: rgba(255,255,255,0.12);
+      border: 1px solid rgba(255,255,255,0.18);
+      backdrop-filter: blur(10px);
+      font-weight: 700;
+      font-size: 0.92rem;
+    }
+
+    h1 {
+      margin: 20px 0 12px;
+      font-size: clamp(2.4rem, 7vw, 5.6rem);
+      line-height: 0.95;
+      letter-spacing: -0.07em;
+    }
+
+    .hero p {
+      max-width: 740px;
+      color: #eef4ff;
+      font-size: clamp(1.05rem, 2vw, 1.28rem);
+      text-shadow: 0 2px 22px rgba(0,0,0,0.4);
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 24px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      text-decoration: none;
+      border: 0;
+      cursor: pointer;
+      padding: 12px 16px;
+      border-radius: 999px;
+      font-weight: 800;
+      color: #101827;
+      background: var(--accent-2);
+      box-shadow: 0 12px 24px rgba(0,0,0,0.18);
+      transition: transform .18s ease, box-shadow .18s ease, background .18s ease;
+    }
+
+    .btn:hover { transform: translateY(-2px); box-shadow: 0 16px 28px rgba(0,0,0,0.24); }
+    .btn.secondary { color: #fff; background: rgba(255,255,255,0.14); border: 1px solid rgba(255,255,255,0.20); }
+    .btn.small { padding: 9px 12px; font-size: 0.9rem; }
+
+    section { padding: 74px 0; }
+    section.compact { padding-top: 36px; }
+
+    .section-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      gap: 24px;
+      margin-bottom: 26px;
+    }
+
+    .section-head h2 {
+      font-size: clamp(1.8rem, 4vw, 3rem);
+      line-height: 1.02;
+      margin: 0;
+      letter-spacing: -0.045em;
+    }
+
+    .section-head p { margin: 8px 0 0; color: var(--muted); max-width: 650px; }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 18px;
+    }
+
+    .card {
+      background: linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.035));
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .info-card {
+      grid-column: span 4;
+      padding: 22px;
+    }
+
+    .info-card b { color: #fff; }
+    .info-card p { color: var(--muted); margin-bottom: 0; }
+    .icon { font-size: 1.8rem; }
+
+    .filters {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 24px;
+    }
+
+    .filter-btn {
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,0.07);
+      color: var(--muted);
+      border-radius: 999px;
+      padding: 10px 13px;
+      cursor: pointer;
+      font-weight: 800;
+    }
+
+    .filter-btn.active,
+    .filter-btn:hover {
+      background: var(--accent);
+      color: white;
+      border-color: transparent;
+    }
+
+    .attraction-card {
+      grid-column: span 4;
+      display: flex;
+      flex-direction: column;
+      min-height: 100%;
+    }
+
+    .attraction-card img {
+      width: 100%;
+      height: 210px;
+      object-fit: cover;
+      background: #0b1220;
+    }
+
+    .attraction-body { padding: 20px; display: flex; flex-direction: column; gap: 12px; flex: 1; }
+    .attraction-body h3 { margin: 0; font-size: 1.35rem; letter-spacing: -0.02em; }
+    .attraction-body p { color: var(--muted); margin: 0; }
+
+    .meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .tag {
+      display: inline-flex;
+      padding: 6px 9px;
+      border-radius: 999px;
+      font-size: 0.78rem;
+      font-weight: 800;
+      color: #dbeafe;
+      background: rgba(125, 211, 252, 0.12);
+      border: 1px solid rgba(125, 211, 252, 0.18);
+    }
+
+    .tag.price { color: #dcfce7; background: rgba(110,231,183,0.12); border-color: rgba(110,231,183,0.18); }
+    .tag.warn { color: #fff7ed; background: rgba(255,209,102,0.14); border-color: rgba(255,209,102,0.22); }
+
+    .card-actions {
+      margin-top: auto;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .itinerary-day {
+      grid-column: span 4;
+      padding: 22px;
+      position: relative;
+    }
+
+    .day-number {
+      width: 44px;
+      height: 44px;
+      display: grid;
+      place-items: center;
+      border-radius: 14px;
+      background: rgba(255,107,74,0.18);
+      border: 1px solid rgba(255,107,74,0.28);
+      font-weight: 900;
+      color: #ffd7ce;
+      margin-bottom: 14px;
+    }
+
+    .itinerary-day h3 { margin: 0 0 10px; }
+    .itinerary-day ul { margin: 0; padding-left: 18px; color: var(--muted); }
+    .itinerary-day li { margin: 8px 0; }
+
+    .budget {
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 18px;
+      align-items: stretch;
+    }
+
+    .budget-panel { padding: 24px; }
+    .budget-list { display: grid; gap: 10px; }
+
+    .check-row {
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      gap: 12px;
+      align-items: center;
+      padding: 12px;
+      border-radius: 16px;
+      background: rgba(255,255,255,0.055);
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .check-row span { color: var(--muted); font-size: 0.92rem; }
+    input[type="checkbox"] { width: 19px; height: 19px; accent-color: var(--accent); }
+    input[type="number"] {
+      width: 86px;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 10px;
+      color: #fff;
+      background: rgba(0,0,0,0.18);
+    }
+
+    .total-box {
+      min-height: 100%;
+      display: grid;
+      place-items: center;
+      text-align: center;
+      padding: 28px;
+      background: linear-gradient(145deg, rgba(255,107,74,0.20), rgba(125,211,252,0.12));
+    }
+
+    .total-box .total {
+      font-size: clamp(3rem, 7vw, 5rem);
+      line-height: 1;
+      letter-spacing: -0.06em;
+      font-weight: 900;
+      margin: 8px 0;
+    }
+
+    .note {
+      margin-top: 14px;
+      padding: 16px;
+      border-radius: 18px;
+      background: rgba(255, 209, 102, 0.11);
+      border: 1px solid rgba(255, 209, 102, 0.18);
+      color: #fff2c2;
+    }
+
+    .food-card {
+      grid-column: span 3;
+      padding: 20px;
+      min-height: 170px;
+    }
+    .food-card h3 { margin: 0 0 10px; }
+    .food-card p { color: var(--muted); margin: 0; }
+
+    footer {
+      padding: 34px 0 54px;
+      color: var(--muted);
+      border-top: 1px solid var(--border);
+      background: rgba(0,0,0,0.16);
+    }
+
+    .sources {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 16px;
+    }
+
+    .source-link {
+      color: #dbeafe;
+      text-decoration: none;
+      padding: 8px 10px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid var(--border);
+      font-size: 0.88rem;
+    }
+
+    .source-link:hover { background: rgba(255,255,255,0.14); }
+
+    @media (max-width: 900px) {
+      nav.topbar { position: static; transform: none; margin: 14px auto 0; border-radius: 22px; align-items: flex-start; }
+      .nav-links { display: none; }
+      header.hero { min-height: auto; }
+      .hero-content { padding: 68px 0 36px; }
+      .info-card, .attraction-card, .itinerary-day, .food-card { grid-column: span 6; }
+      .budget { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 640px) {
+      .info-card, .attraction-card, .itinerary-day, .food-card { grid-column: span 12; }
+      .section-head { display: block; }
+      .attraction-card img { height: 190px; }
+      .check-row { grid-template-columns: auto 1fr; }
+      .check-row strong:last-child { grid-column: 2; }
+    }
+  </style>
+</head>
+<body>
+  <nav class="topbar">
+    <div class="brand"><span class="mark">SF</span><span>San Francisco · Junio 2026</span></div>
+    <div class="nav-links">
+      <a href="#recomendaciones">Recomendaciones</a>
+      <a href="#itinerario">Itinerario</a>
+      <a href="#presupuesto">Presupuesto</a>
+      <a href="#comida">Comida</a>
+    </div>
+  </nav>
+
+  <header class="hero">
+    <div class="container hero-content">
+      <h1>San Francisco para los perros de la 91</h1>
+      <p>
+        Una guía práctica para combinar clásicos imperdibles, buenas fotos, actividades pagas que valen la pena y planes gratis. La idea: armar el viaje como una buena playlist —variedad, ritmo y algunos hits seguros. NO INCLUYE NBA, no rompan las bolas con eso.
+      </p>
+      <div class="hero-actions">
+        <a class="btn" href="#recomendaciones">Ver lugares recomendados</a>
+        <a class="btn secondary" href="#presupuesto">Calcular presupuesto</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="compact">
+      <div class="container grid">
+        <article class="card info-card">
+          <div class="icon">🧥</div>
+          <h3>Clima de junio</h3>
+          <p>San Francisco puede sentirse fresco aunque sea verano. Lleven campera liviana, especialmente para Golden Gate, Alcatraz, barcos y atardeceres.</p>
+        </article>
+        <article class="card info-card">
+          <div class="icon">🎟️</div>
+          <h3>Reservar antes</h3>
+          <p><b>Alcatraz</b> y <b>Muir Woods</b> son los dos puntos donde conviene asegurar lugar. En temporada alta, improvisar puede salir caro.</p>
+        </article>
+        <article class="card info-card">
+          <div class="icon">🚶</div>
+          <h3>Ciudad para caminar</h3>
+          <p>Armen días por zonas. Es mejor hacer Fisherman’s Wharf + Alcatraz + Pier 39 juntos que cruzar la ciudad sin necesidad.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="recomendaciones">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <h2>Lugares y experiencias recomendadas</h2>
+            <p>Filtren por tipo de plan. Los precios son adultos aproximados en USD, revisados contra páginas oficiales o proveedores principales.</p>
+          </div>
+        </div>
+
+        <div class="filters" aria-label="Filtros de atracciones">
+          <button class="filter-btn active" data-filter="all">Todo</button>
+          <button class="filter-btn" data-filter="gratis">Gratis / bajo costo</button>
+          <button class="filter-btn" data-filter="tickets">Con boleto</button>
+          <button class="filter-btn" data-filter="foto">Fotos</button>
+          <button class="filter-btn" data-filter="naturaleza">Naturaleza</button>
+          <button class="filter-btn" data-filter="noche">Noche</button>
+        </div>
+
+        <div class="grid" id="cardsGrid">
+          <article class="card attraction-card" data-category="gratis foto">
+            <img src="https://images.unsplash.com/photo-1610312278520-bcc893a3ff1d?auto=format&fit=crop&w=900&q=80" alt="Golden Gate Bridge desde Marin Headlands" loading="lazy" />
+            <div class="attraction-body">
+              <div class="meta"><span class="tag price">Gratis</span><span class="tag">Foto top</span><span class="tag">Clásico</span></div>
+              <h3>Golden Gate Bridge + Battery Spencer</h3>
+              <p>El ícono. Para la foto más dramática, crucen hacia Marin Headlands / Battery Spencer. Para algo más simple, vayan al Welcome Center.</p>
+              <div class="card-actions">
+                <a class="btn small" target="_blank" rel="noopener" href="https://www.goldengate.org/bridge/visiting-the-bridge/">Info oficial</a>
+                <a class="btn small secondary" target="_blank" rel="noopener" href="https://maps.google.com/?q=Battery+Spencer+San+Francisco">Ver en Maps</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="card attraction-card" data-category="tickets foto noche">
+            <img src="https://images.unsplash.com/photo-1745814764859-139f812c282e?auto=format&fit=crop&w=900&q=80" alt="Alcatraz Island en la bahía de San Francisco" loading="lazy" />
+            <div class="attraction-body">
+              <div class="meta"><span class="tag price">Desde $47.95</span><span class="tag warn">Reservar</span><span class="tag">Historia</span></div>
+              <h3>Alcatraz Island</h3>
+              <p>Probablemente el boleto más importante del viaje. El Day Tour adulto figura en $47.95; el Night Tour adulto ronda $59.65.</p>
+              <div class="card-actions">
+                <a class="btn small" target="_blank" rel="noopener" href="https://www.cityexperiences.com/san-francisco/city-cruises/alcatraz/tour-options/">Comprar boletos</a>
+                <a class="btn small secondary" target="_blank" rel="noopener" href="https://www.nps.gov/alca/planyourvisit/fees.htm">Precios NPS</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="card attraction-card" data-category="naturaleza tickets foto">
+            <img src="https://images.unsplash.com/photo-1710020339360-ce951881b835?auto=format&fit=crop&w=900&q=80" alt="Redwoods en Muir Woods National Monument" loading="lazy" />
+            <div class="attraction-body">
+              <div class="meta"><span class="tag price">$15 entrada</span><span class="tag warn">Reserva parking/shuttle</span><span class="tag">Naturaleza</span></div>
+              <h3>Muir Woods + Sausalito</h3>
+              <p>Redwoods gigantes a poca distancia de la ciudad. La entrada cuesta $15 para mayores de 16; el parking o shuttle requiere reserva separada.</p>
+              <div class="card-actions">
+                <a class="btn small" target="_blank" rel="noopener" href="https://gomuirwoods.com/">Reservar parking/shuttle</a>
+                <a class="btn small secondary" target="_blank" rel="noopener" href="https://www.nps.gov/muwo/planyourvisit/fees.htm">Precios NPS</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="card attraction-card" data-category="tickets foto">
+            <img src="https://images.unsplash.com/photo-1730655900630-b046f843ab2e?auto=format&fit=crop&w=900&q=80" alt="Barcos turísticos en Fisherman's Wharf, San Francisco" loading="lazy" />
+            <div class="attraction-body">
+              <div class="meta"><span class="tag price">Adulto $39</span><span class="tag">Bahía</span><span class="tag">Fotos</span></div>
+              <h3>Bay Cruise de 60 minutos</h3>
+              <p>Gran alternativa si no consiguen Alcatraz o quieren fotos desde el agua. Pasa por la bahía, con vistas del Golden Gate y Alcatraz.</p>
+              <div class="card-actions">
+                <a class="btn small" target="_blank" rel="noopener" href="https://www.blueandgoldfleet.com/sf-bay-cruise/">Comprar boletos</a>
+                <a class="btn small secondary" target="_blank" rel="noopener" href="https://www.blueandgoldfleet.com/">Blue & Gold Fleet</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="card attraction-card" data-category="tickets noche">
+            <img src="https://images.unsplash.com/photo-1630974075153-458bf183d889?auto=format&fit=crop&w=900&q=80" alt="Interior del Exploratorium en San Francisco" loading="lazy" />
+            <div class="attraction-body">
+              <div class="meta"><span class="tag price">Día $39.95</span><span class="tag price">After Dark $22.95</span><span class="tag">Interactivo</span></div>
+              <h3>Exploratorium</h3>
+              <p>Museo de ciencia muy entretenido para grupo de amigos. Si cae jueves, el After Dark para adultos es más barato y tiene mejor vibra nocturna.</p>
+              <div class="card-actions">
+                <a class="btn small" target="_blank" rel="noopener" href="https://www.exploratorium.edu/tickets">Comprar boletos</a>
+                <a class="btn small secondary" target="_blank" rel="noopener" href="https://www.exploratorium.edu/visit">Planificar visita</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="card attraction-card" data-category="tickets">
+            <img src="https://images.unsplash.com/photo-1491186689391-c838ee3b8689?auto=format&fit=crop&w=900&q=80" alt="Interior arquitectónico del SFMOMA" loading="lazy" />
+            <div class="attraction-body">
+              <div class="meta"><span class="tag price">Adulto $30</span><span class="tag">Arte</span><span class="tag">Indoor</span></div>
+              <h3>SFMOMA</h3>
+              <p>Perfecto si quieren un plan más tranquilo o si el clima se pone frío. Buena opción para combinar con Union Square o Yerba Buena Gardens.</p>
+              <div class="card-actions">
+                <a class="btn small" target="_blank" rel="noopener" href="https://www.sfmoma.org/visit/">Comprar / visitar</a>
+                <a class="btn small secondary" target="_blank" rel="noopener" href="https://maps.google.com/?q=SFMOMA+San+Francisco">Ver en Maps</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="card attraction-card" data-category="tickets naturaleza">
+            <img src="https://images.unsplash.com/photo-1601056645211-1d4b637bfed1?auto=format&fit=crop&w=900&q=80" alt="California Academy of Sciences en Golden Gate Park" loading="lazy" />
+            <div class="attraction-body">
+              <div class="meta"><span class="tag price">Anytime $59</span><span class="tag">Acuario</span><span class="tag">Planetario</span></div>
+              <h3>California Academy of Sciences</h3>
+              <p>Acuario, rainforest dome, planetario y museo natural en Golden Gate Park. Buena opción si quieren concentrar varias experiencias en un solo lugar.</p>
+              <div class="card-actions">
+                <a class="btn small" target="_blank" rel="noopener" href="https://www.calacademy.org/buy-tickets">Comprar boletos</a>
+                <a class="btn small secondary" target="_blank" rel="noopener" href="https://www.calacademy.org/hours-admission">Horarios y admisión</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="card attraction-card" data-category="gratis foto">
+            <img src="https://images.unsplash.com/photo-1752968940274-318136a6d935?auto=format&fit=crop&w=900&q=80" alt="Lombard Street en San Francisco" loading="lazy" />
+            <div class="attraction-body">
+              <div class="meta"><span class="tag price">Gratis</span><span class="tag">Foto</span><span class="tag">Caminata</span></div>
+              <h3>Lombard Street + North Beach</h3>
+              <p>La calle famosa de curvas. Ideal hacerla caminando y luego bajar hacia North Beach para café, pizza o cena italiana.</p>
+              <div class="card-actions">
+                <a class="btn small" target="_blank" rel="noopener" href="https://maps.google.com/?q=Lombard+Street+San+Francisco">Ver en Maps</a>
+                <a class="btn small secondary" target="_blank" rel="noopener" href="https://maps.google.com/?q=North+Beach+San+Francisco">North Beach</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="card attraction-card" data-category="tickets foto">
+            <img src="https://images.unsplash.com/photo-1763246168695-36dc30e507ab?auto=format&fit=crop&w=900&q=80" alt="Entrada de Oracle Park, estadio de los San Francisco Giants" loading="lazy" />
+            <div class="attraction-body">
+              <div class="meta"><span class="tag price">Tour $46</span><span class="tag">Béisbol</span><span class="tag">Bahía</span></div>
+              <h3>Oracle Park Tour o partido Giants</h3>
+              <p>El tour detrás de escena cuesta $46 para adultos. Si hay partido en la fecha, también puede ser una experiencia muy local.</p>
+              <div class="card-actions">
+                <a class="btn small" target="_blank" rel="noopener" href="https://www.mlb.com/giants/ballpark/tours/daily-public">Tour oficial</a>
+                <a class="btn small secondary" target="_blank" rel="noopener" href="https://www.mlb.com/giants/schedule/2026-06">Calendario Giants</a>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="itinerario">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <h2>Itinerario sugerido de 4 días</h2>
+            <p>Está pensado para un grupo de amigos: ritmo cómodo, fotos, comida y sin meter demasiadas cosas en el mismo día.</p>
+          </div>
+        </div>
+        <div class="grid">
+          <article class="card itinerary-day">
+            <div class="day-number">1</div>
+            <h3>Clásicos del norte</h3>
+            <ul>
+              <li>Golden Gate Bridge Welcome Center</li>
+              <li>Battery Spencer para la foto grande</li>
+              <li>Palace of Fine Arts</li>
+              <li>Cena en Marina / North Beach</li>
+            </ul>
+          </article>
+          <article class="card itinerary-day">
+            <div class="day-number">2</div>
+            <h3>Bahía + Alcatraz</h3>
+            <ul>
+              <li>Fisherman’s Wharf y Pier 39</li>
+              <li>Alcatraz Day Tour o Night Tour</li>
+              <li>Bay Cruise si quieren sumar fotos desde el agua</li>
+              <li>Irish coffee en Buena Vista Café</li>
+            </ul>
+          </article>
+          <article class="card itinerary-day">
+            <div class="day-number">3</div>
+            <h3>Golden Gate Park</h3>
+            <ul>
+              <li>California Academy of Sciences o de Young</li>
+              <li>Japanese Tea Garden</li>
+              <li>Haight-Ashbury</li>
+              <li>Atardecer en Ocean Beach si el clima ayuda</li>
+            </ul>
+          </article>
+          <article class="card itinerary-day">
+            <div class="day-number">4</div>
+            <h3>Redwoods + Sausalito</h3>
+            <ul>
+              <li>Muir Woods temprano</li>
+              <li>Almuerzo en Sausalito</li>
+              <li>Regreso por Golden Gate</li>
+              <li>Plan liviano de noche</li>
+            </ul>
+          </article>
+          <article class="card itinerary-day">
+            <div class="day-number">+</div>
+            <h3>Si sobra tiempo</h3>
+            <ul>
+              <li>Exploratorium, ideal jueves After Dark</li>
+              <li>SFMOMA para plan indoor</li>
+              <li>Oracle Park tour o partido</li>
+              <li>Mission District + Dolores Park</li>
+            </ul>
+          </article>
+          <article class="card itinerary-day">
+            <div class="day-number">$</div>
+            <h3>Tip de ahorro</h3>
+            <ul>
+              <li>Comparen CityPASS si harán 4 atracciones incluidas</li>
+              <li>No paguen tour para todo: varios clásicos son gratis</li>
+              <li>Usen Muni/Clipper para moverse dentro de la ciudad</li>
+              <li>Eviten auto dentro de SF salvo para Muir Woods</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="presupuesto">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <h2>Calculador rápido de entradas</h2>
+            <p>Marquen lo que les interesa. El total es por persona y sirve como estimación inicial; no incluye alojamiento, comida, transporte ni impuestos/comisiones de algunos sitios.</p>
+          </div>
+        </div>
+
+        <div class="budget">
+          <div class="card budget-panel">
+            <div class="budget-list" id="budgetList">
+              <label class="check-row"><input type="checkbox" data-price="47.95" checked /><strong>Alcatraz Day Tour</strong><strong>$47.95</strong></label>
+              <label class="check-row"><input type="checkbox" data-price="15" checked /><strong>Muir Woods entrada</strong><strong>$15.00</strong></label>
+              <label class="check-row"><input type="checkbox" data-price="39" /><strong>Bay Cruise 60 minutos</strong><strong>$39.00</strong></label>
+              <label class="check-row"><input type="checkbox" data-price="39.95" /><strong>Exploratorium día</strong><strong>$39.95</strong></label>
+              <label class="check-row"><input type="checkbox" data-price="22.95" /><strong>Exploratorium After Dark</strong><strong>$22.95</strong></label>
+              <label class="check-row"><input type="checkbox" data-price="30" /><strong>SFMOMA</strong><strong>$30.00</strong></label>
+              <label class="check-row"><input type="checkbox" data-price="59" /><strong>California Academy Anytime</strong><strong>$59.00</strong></label>
+              <label class="check-row"><input type="checkbox" data-price="46" /><strong>Oracle Park Tour</strong><strong>$46.00</strong></label>
+              <label class="check-row"><input type="checkbox" data-price="89.95" /><strong>CityPASS adulto</strong><strong>$89.95</strong></label>
+            </div>
+            <div class="note">
+              Ojo con duplicar: si compran CityPASS, no sumen aparte las atracciones que el pase ya cubre. Es como pagar Netflix y luego alquilar la misma película por separado.
+            </div>
+          </div>
+          <div class="card total-box">
+            <div>
+              <span class="pill">Total estimado por persona</span>
+              <div class="total" id="totalPrice">$62.95</div>
+              <p>Base marcada: Alcatraz + Muir Woods.</p>
+              <label style="display:inline-flex; gap:10px; align-items:center; color:var(--muted); margin-top:10px;">
+                Personas:
+                <input type="number" min="1" value="1" id="peopleCount" />
+              </label>
+              <p id="groupTotal" style="font-weight:800;color:#fff;">Grupo: $62.95</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="comida">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <h2>Zonas para comer y salir</h2>
+            <p>Sin convertir esto en una lista eterna de restaurantes, estas zonas ayudan a decidir rápido según dónde estén.</p>
+          </div>
+        </div>
+        <div class="grid">
+          <article class="card food-card"><h3>North Beach</h3><p>Italiano, bares y ambiente clásico. Muy buena continuación después de Lombard Street o Fisherman’s Wharf.</p></article>
+          <article class="card food-card"><h3>Mission District</h3><p>Burritos, murales, cervecerías y Dolores Park. Buen plan más local y menos “postal”.</p></article>
+          <article class="card food-card"><h3>Ferry Building</h3><p>Mercado gastronómico elegante para almuerzo o snacks antes de caminar por el Embarcadero.</p></article>
+          <article class="card food-card"><h3>Chinatown</h3><p>Ideal para caminar, comer dumplings y conectar con North Beach en el mismo recorrido.</p></article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <strong>Notas importantes</strong>
+      <p>
+        Precios revisados en abril de 2026. Para junio, conviene confirmar disponibilidad y precio final en cada página oficial antes de comprar. Alcatraz puede verse afectado por trabajos operativos o de muelle, así que revisen fechas concretas antes de cerrar el itinerario.
+      </p>
+      <div class="sources">
+        <a class="source-link" target="_blank" rel="noopener" href="https://www.nps.gov/alca/planyourvisit/fees.htm">Alcatraz NPS</a>
+        <a class="source-link" target="_blank" rel="noopener" href="https://www.cityexperiences.com/san-francisco/city-cruises/alcatraz/tour-options/">Alcatraz City Cruises</a>
+        <a class="source-link" target="_blank" rel="noopener" href="https://www.nps.gov/muwo/planyourvisit/fees.htm">Muir Woods NPS</a>
+        <a class="source-link" target="_blank" rel="noopener" href="https://gomuirwoods.com/">Go Muir Woods</a>
+        <a class="source-link" target="_blank" rel="noopener" href="https://www.sfmoma.org/visit/">SFMOMA</a>
+        <a class="source-link" target="_blank" rel="noopener" href="https://www.exploratorium.edu/visit">Exploratorium</a>
+        <a class="source-link" target="_blank" rel="noopener" href="https://www.calacademy.org/buy-tickets">California Academy</a>
+        <a class="source-link" target="_blank" rel="noopener" href="https://www.citypass.com/san-francisco">CityPASS</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Fallback automático: si alguna imagen externa falla, se muestra un placeholder para evitar fotos incorrectas.
+    document.querySelectorAll('img').forEach(img => {
+      img.addEventListener('error', () => {
+        img.src = 'data:image/svg+xml;charset=UTF-8,' + encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" width="900" height="600" viewBox="0 0 900 600"><rect width="900" height="600" fill="#152238"/><text x="50%" y="48%" text-anchor="middle" fill="#f8fafc" font-family="Arial, sans-serif" font-size="34" font-weight="700">Imagen no disponible</text><text x="50%" y="57%" text-anchor="middle" fill="#b8c4d6" font-family="Arial, sans-serif" font-size="20">Revisar URL de la foto</text></svg>`);
+      }, { once: true });
+    });
+    const filterButtons = document.querySelectorAll('.filter-btn');
+    const cards = document.querySelectorAll('.attraction-card');
+
+    filterButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        filterButtons.forEach(btn => btn.classList.remove('active'));
+        button.classList.add('active');
+        const filter = button.dataset.filter;
+
+        cards.forEach(card => {
+          const categories = card.dataset.category.split(' ');
+          const show = filter === 'all' || categories.includes(filter);
+          card.style.display = show ? 'flex' : 'none';
+        });
+      });
+    });
+
+    const checkboxes = document.querySelectorAll('#budgetList input[type="checkbox"]');
+    const totalPrice = document.getElementById('totalPrice');
+    const peopleCount = document.getElementById('peopleCount');
+    const groupTotal = document.getElementById('groupTotal');
+
+    function money(value) {
+      return '$' + value.toFixed(2);
+    }
+
+    function updateBudget() {
+      const perPerson = Array.from(checkboxes)
+        .filter(cb => cb.checked)
+        .reduce((sum, cb) => sum + Number(cb.dataset.price), 0);
+
+      const people = Math.max(1, Number(peopleCount.value || 1));
+      totalPrice.textContent = money(perPerson);
+      groupTotal.textContent = 'Grupo: ' + money(perPerson * people);
+    }
+
+    checkboxes.forEach(cb => cb.addEventListener('change', updateBudget));
+    peopleCount.addEventListener('input', updateBudget);
+    updateBudget();
+  </script>
+</body>
+</html>
